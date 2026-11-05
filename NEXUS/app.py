@@ -8,6 +8,26 @@ from nexus.database import init_db, add_log, get_logs
 st.set_page_config(page_title="NEXUS | Automation Engine", page_icon="assets/nexus.png", layout="wide")
 init_db()
 
+# Phone/PC "install" support: manifest + home-screen icons (served from ./static)
+import streamlit.components.v1 as components
+components.html("""
+<script>
+const head = window.parent.document.head;
+const add = (tag, attrs) => {
+  const sel = tag + Object.entries(attrs).map(([k, v]) => `[${k}="${v}"]`).join('');
+  if (head.querySelector(sel)) return;
+  const el = window.parent.document.createElement(tag);
+  Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+  head.appendChild(el);
+};
+add('link', {rel: 'manifest', href: '/app/static/manifest.json'});
+add('link', {rel: 'apple-touch-icon', href: '/app/static/apple-touch-icon.png'});
+add('link', {rel: 'icon', type: 'image/png', href: '/app/static/favicon-32.png'});
+add('meta', {name: 'theme-color', content: '#0b1020'});
+add('meta', {name: 'apple-mobile-web-app-capable', content: 'yes'});
+</script>
+""", height=0)
+
 st.markdown("""
 <style>
 .stApp { background: #0b1020; color: #e8eefc; }
