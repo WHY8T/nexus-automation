@@ -5,7 +5,10 @@ from nexus.duplicates import find_duplicates
 from nexus.renamer import preview_rename, execute_rename
 from nexus.database import init_db, add_log, get_logs
 
-st.set_page_config(page_title="NEXUS | Automation Engine", page_icon="assets/nexus.png", layout="wide")
+BASE_DIR = Path(__file__).resolve().parent
+ASSETS = BASE_DIR / "assets"
+
+st.set_page_config(page_title="NEXUS | Automation Engine", page_icon=str(ASSETS / "nexus.png"), layout="wide")
 init_db()
 
 # Phone/PC "install" support: manifest + home-screen icons (served from ./static)
@@ -40,13 +43,13 @@ div[data-testid="stMetric"] { background: #131e34; border: 1px solid #243653; pa
 
 brand_col, title_col = st.columns([1, 5], vertical_alignment="center")
 with brand_col:
-    st.image("assets/nexus-logo-trim.png", width=118)
+    st.image(str(ASSETS / "nexus-logo-trim.png"), width=118)
 with title_col:
     st.title("NEXUS")
     st.caption("PERSONAL AUTOMATION ENGINE  •  Local-first • Safe by design")
 
 with st.sidebar:
-    st.image("assets/nexus.png", width=64)
+    st.image(str(ASSETS / "nexus.png"), width=64)
     st.markdown("## NEXUS")
     st.caption("PERSONAL AUTOMATION ENGINE")
     page = st.radio("WORKSPACE", ["Overview", "File Organizer", "Duplicate Finder", "Batch Renamer", "Activity Logs"])
