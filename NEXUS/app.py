@@ -18,8 +18,12 @@ div[data-testid="stMetric"] { background: #131e34; border: 1px solid #243653; pa
 </style>
 """, unsafe_allow_html=True)
 
-st.title("NEXUS")
-st.caption("PERSONAL AUTOMATION ENGINE  •  Local-first • Safe by design")
+brand_col, title_col = st.columns([1, 5], vertical_alignment="center")
+with brand_col:
+    st.image("assets/nexus-logo-trim.png", width=118)
+with title_col:
+    st.title("NEXUS")
+    st.caption("PERSONAL AUTOMATION ENGINE  •  Local-first • Safe by design")
 
 with st.sidebar:
     st.image("assets/nexus.png", width=64)
